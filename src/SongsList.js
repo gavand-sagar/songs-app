@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { getJsonData } from './ApiUtitilities.js'
 import Header from './Header.js';
+import { useLoader } from './useLoader.js';
 
 export default function SongsList() {
 
     const [songs, setSongs] = useState([])
+
+    const { setLoaderSpinning } = useLoader()
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -16,8 +20,10 @@ export default function SongsList() {
 
     function getData() {
         // api call
+        setLoaderSpinning(true)
         getJsonData('/songs')
             .then(response => {
+                setLoaderSpinning(false)
                 // what we do when we will receive the response
                 if (response == "Un Authorized") {
                     localStorage.clear();

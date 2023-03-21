@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { postJsonData } from './ApiUtitilities.js'
 import Header from './Header.js'
+import { useLoader } from './useLoader.js'
 
 export default function AddSong() {
 
     const [songName, setSongName] = useState('')
     const [rating, setRating] = useState('')
+    const { setLoaderSpinning } = useLoader()
 
     function save() {
         //post a document
@@ -13,10 +15,12 @@ export default function AddSong() {
             songName: songName,
             rating: rating
         }
-
+        setLoaderSpinning(true)
         postJsonData('/songs', obj)
             .then(response => {
-                window.location.reload()
+                setLoaderSpinning(false)
+                
+                alert('Song Added')
             })
     }
 

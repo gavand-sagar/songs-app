@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeCapiltal } from './operations.js'
+import { makeCapiltal } from '../../../operations.js'
 
 export default function Capitalize({ label }) {
 

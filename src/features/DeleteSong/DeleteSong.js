@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { deleteJsonData } from './ApiUtitilities.js'
-import Header from './Header.js'
+import { deleteJsonData } from '../../shared/utils/ApiUtitilities.js'
+import Header from '../../shared/components/Header/Header.js'
 
 export default function DeleteSong() {
 

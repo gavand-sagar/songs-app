@@ -74,3 +74,17 @@
         rotate: 360deg;
     }
 }
+
+
+.song-item{
+    margin: var(--base-spacing);
+    border:2px solid rgb(224, 222, 222);
+    border-radius: 5px;
+    padding: var(--base-spacing);
+    display: flex;
+    justify-content: space-around;
+}
+
+.song-skeleton{
+    padding: var(--base-spacing);
+}

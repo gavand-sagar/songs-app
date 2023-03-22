@@ -1,8 +1,8 @@
 import { Button, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { baseURL } from './constants'
-import { useLoader } from './useLoader'
+import { baseURL } from '../../data/constants.js'
+import { useLoader } from '../../shared/hooks/useLoader'
 
 export default function () {
     const [username, setUsername] = useState('')

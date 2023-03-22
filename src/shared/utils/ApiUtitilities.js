@@ -1,4 +1,4 @@
-import { baseURL } from "./constants.js"
+import { baseURL } from "../../data/constants.js"
 export function postJsonData(url, obj) {
     return fetch(baseURL + url, {
         method: 'POST',

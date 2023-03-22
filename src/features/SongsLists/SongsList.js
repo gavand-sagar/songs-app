@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { getJsonData } from '../../shared/utils/ApiUtitilities.js'
 import Header from '../../shared/components/Header/Header.js';
-import { useLoader } from '../../shared/hooks/useLoader.js';
 import SongItem from './SongItem.js';
-import { Skeleton } from '@mui/material';
 import SongSkeleton from './SongSkeleton.js';
 
 export default function SongsList() {
@@ -42,8 +40,6 @@ export default function SongsList() {
         <div>
             <Header />
             SongsList
-
-
             <hr />
             {
                 isLoading == true ?

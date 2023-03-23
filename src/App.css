@@ -77,7 +77,7 @@
 
 .song-item {
     margin: var(--base-spacing);
-    border: 2px solid rgb(224, 222, 222);
+    border: 2px solid  var(--base-color);
     border-radius: 5px;
     padding: var(--base-spacing);
     display: flex;

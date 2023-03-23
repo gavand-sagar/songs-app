@@ -7,7 +7,6 @@
 }
 
 .header-username {
-    text-align: right;
     font-size: 30px;
     font-weight: bold;
     ;
@@ -76,15 +75,43 @@
 }
 
 
-.song-item{
+.song-item {
     margin: var(--base-spacing);
-    border:2px solid rgb(224, 222, 222);
+    border: 2px solid rgb(224, 222, 222);
     border-radius: 5px;
     padding: var(--base-spacing);
     display: flex;
     justify-content: space-around;
 }
 
-.song-skeleton{
+.song-skeleton {
     padding: var(--base-spacing);
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    position: sticky;
+    top: 0;
+    background: linear-gradient(to bottom right, var(--base-color-1), var(--base-color), var(--base-color-2));
+}
+
+.user-info {
+    display: flex;
+    gap: 5px;
+    color: white;
+}
+
+.add-song-form{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }

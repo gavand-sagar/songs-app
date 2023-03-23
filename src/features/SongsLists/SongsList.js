@@ -44,11 +44,11 @@ export default function SongsList() {
             {
                 isLoading == true ?
                     <div>
-                        <SongSkeleton/>
-                        <SongSkeleton/>
-                        <SongSkeleton/>
-                        <SongSkeleton/>
-                        <SongSkeleton/>
+                        <SongSkeleton />
+                        <SongSkeleton />
+                        <SongSkeleton />
+                        <SongSkeleton />
+                        <SongSkeleton />
                     </div>
                     : songs.map(x => <SongItem songName={x.songName} rating={x.rating} key={x._id} />)
             }

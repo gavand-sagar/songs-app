@@ -4,8 +4,12 @@ import Header from '../../shared/components/Header/Header.js'
 import { useLoader } from '../../shared/hooks/useLoader.js'
 import { useForm } from 'react-hook-form'
 import { Button, TextField } from '@mui/material'
+import { useSelector } from 'react-redux'
 
 export default function AddSong() {
+
+    const { username } = useSelector(state => state.user)
+
 
     const { handleSubmit, register, formState: { errors } } = useForm();
 
@@ -24,7 +28,7 @@ export default function AddSong() {
     return (
         <div>
             <Header />
-            <h3>Add Song Form</h3>
+            <h3>Add Song Form {username}</h3>
 
             <form className='add-song-form' onSubmit={handleSubmit(save)}>
                 <div>

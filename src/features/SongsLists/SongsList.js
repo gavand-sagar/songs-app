@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'
 import { getJsonData } from '../../shared/utils/ApiUtitilities.js'
 import Header from '../../shared/components/Header/Header.js';
 import SongItem from './SongItem.js';
 import SongSkeleton from './SongSkeleton.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeToSagar, changeUsername } from '../../data/userSlice.js'
-import { addNewSong, changeAllSongs } from '../../data/songSlice.js';
+import { changeAllSongs } from '../../data/songSlice.js';
 
 export default function SongsList() {
 
@@ -19,8 +17,6 @@ export default function SongsList() {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const navigate = useNavigate()
-
     const dispatch = useDispatch();
 
     function getData() {
@@ -30,17 +26,7 @@ export default function SongsList() {
         getJsonData('/songs')
             .then(response => {
                 setIsLoading(false)
-                // what we do when we will receive the response
-                if (response == "Un Authorized") {
-                    localStorage.clear();
-                    // redirect to login
-                    navigate('/login')
-                } else {
-                    // setSongs(response)
-
-                    // change redux store now
-                    dispatch(changeAllSongs(response))
-                }
+                dispatch(changeAllSongs(response))
             })
     }
 

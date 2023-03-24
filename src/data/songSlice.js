@@ -33,7 +33,7 @@ const songsSlice = createSlice({
         //this is what should happen when server will send you response 
         // response will be available in (action.payload)
         builder.addCase(getAllSongs.fulfilled, (state, action) => {
-            state.allSongs = action.payload
+            state.allSongs = action.payload  /// action.payload = response from api
             state.loadingTheSongs = false;
 
         })
@@ -52,14 +52,15 @@ const songsSlice = createSlice({
             state.products = action.payload
         })
 
+    },
+
+    reducers: {
+        changeAllSongs: (state, action) => {
+            state.allSongs = action.payload
+        }
     }
-    // reducers: {
-    //     changeAllSongs: (state, action) => {
-    //         state.allSongs = action.payload
-    //     }
-    // }
 })
 
-// export const { changeAllSongs } = songsSlice.actions;
+export const { changeAllSongs } = songsSlice.actions;
 
 export default songsSlice;

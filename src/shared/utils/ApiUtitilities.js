@@ -10,6 +10,14 @@ export function postJsonData(url, obj) {
     }).then(res => res.json())
 }
 
+
+export function postFormData(url, obj) {    
+    return fetch(baseURL + url, {
+        method: 'POST',       
+        body: obj
+    }).then(res => res.json())
+}
+
 export function getJsonData(url, obj) {
     return fetch(baseURL + url, {
         method: 'GET',

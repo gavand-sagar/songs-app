@@ -30,7 +30,7 @@ export default function SongsList() {
                         <SongSkeleton />
                         <SongSkeleton />
                     </div>
-                    : allSongs.map(x => <SongItem songName={x.songName} rating={x.rating} key={x._id} />)
+                    : allSongs.map(x => <SongItem songName={x.songName} rating={x.rating} songImage={x.songImage} key={x._id} />)
             }
         </div>
     )

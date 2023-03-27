@@ -8,6 +8,7 @@ import Login from './features/Login/Login.js';
 import Loader from './shared/components/Loader/Loader.js';
 import { useState } from 'react';
 import { GlobalData } from './data/GlobalData.js';
+import Signup from './features/Signup/Signup';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
       <GlobalData.Provider value={{ setLoaderSpinning }}>
         <Routes>
           <Route path='/login' element={<Login />}></Route>
+          <Route path='/signup' element={<Signup />}></Route>
           <Route path='/song-list' element={<SongsList />}></Route>
           <Route path='/add-song' element={<AddSong />}></Route>
           <Route path='/delete-song' element={<DeleteSong />}></Route>

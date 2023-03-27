@@ -2,6 +2,7 @@ import { Avatar, Button } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { baseURL } from '../../../data/constants';
 
 export default function Header() {
 
@@ -9,6 +10,10 @@ export default function Header() {
 
     function getUsername() {
         return localStorage.getItem('username')
+    }
+
+    function getAvatarImageUrl() {
+        return baseURL + '/image/' + localStorage.getItem('avatar')
     }
 
     function logout() {
@@ -29,11 +34,11 @@ export default function Header() {
 
             <div className='header-username'>
                 <div className='user-info'>
-                    <Avatar>{getUsername()?.charAt(0)}</Avatar>
+                    <Avatar src={getAvatarImageUrl()}></Avatar>
                     <span>{getUsername()}</span>
                 </div>
                 <div>
-                    <LogoutIcon sx={{ color: 'white',float:'right' }} onClick={logout}></LogoutIcon>
+                    <LogoutIcon sx={{ color: 'white', float: 'right' }} onClick={logout}></LogoutIcon>
                 </div>
             </div>
         </div>

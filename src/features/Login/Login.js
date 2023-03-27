@@ -1,6 +1,6 @@
 import { Button, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { baseURL } from '../../data/constants.js'
 import { useLoader } from '../../shared/hooks/useLoader'
 
@@ -37,6 +37,7 @@ export default function () {
                 } else {
                     localStorage.setItem("username", username)
                     localStorage.setItem("token", response.token)
+                    localStorage.setItem("avatar", response.avatar)
                     navigate('/song-list')
                 }
             })
@@ -58,6 +59,10 @@ export default function () {
                 <br />
 
                 <Button variant="contained" onClick={login}>Login</Button>
+
+                <br></br>
+                <br></br>
+                <Link to={'/signup'}>Create Account</Link>
             </div>
         </div>
     )

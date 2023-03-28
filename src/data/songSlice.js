@@ -5,6 +5,10 @@ export const getAllSongs = createAsyncThunk('getAllSongs', () => {
     return getJsonData('/songs')
 })
 
+export const getSongsForPage = createAsyncThunk('getSongsForPage', ({ pageNumber, size }) => {
+    return getJsonData('/songs?pageNumber=' + pageNumber + '&itemsPerPage=' + size)
+})
+
 export const getThoughts = createAsyncThunk('getThoughts', () => {
     return getJsonData('/thoughts')
 })
@@ -18,6 +22,7 @@ const songsSlice = createSlice({
     name: 'songs',
     initialState: {
         loadingTheSongs: false,
+        total: 1,
         allSongs: [],
         thoughts: [],
         products: []
@@ -50,6 +55,17 @@ const songsSlice = createSlice({
         // response will be available in (action.payload)
         builder.addCase(getProducts.fulfilled, (state, action) => {
             state.products = action.payload
+        })
+
+
+
+        builder.addCase(getSongsForPage.pending, (state, action) => {
+            state.loadingTheSongs = true
+        })
+        builder.addCase(getSongsForPage.fulfilled, (state, action) => {
+            state.loadingTheSongs = false;
+            state.allSongs = action.payload.items;
+            state.total = action.payload.total
         })
 
     },

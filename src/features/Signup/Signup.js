@@ -1,12 +1,14 @@
 import { Button, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import FileUpload from '../../shared/components/FileUpload/FileUpload'
 import { useLoader } from '../../shared/hooks/useLoader'
-import { postFormData } from '../../shared/utils/ApiUtitilities.js'
+import { postFormData, postJsonData } from '../../shared/utils/ApiUtitilities.js'
 
 export default function () {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [avatar, setAvatar] = useState('')
 
     const { setLoaderSpinning } = useLoader();
 
@@ -20,20 +22,33 @@ export default function () {
 
     function signup() {
 
-        const avatar = document.getElementById('user-avatar').files[0]
+        // const avatar = document.getElementById('user-avatar').files[0]
 
-        let data = new FormData();
-        data.append('username', username)
-        data.append('password', password)
-        data.append('avatar', avatar)
+        // let data = new FormData();
+        // data.append('username', username)
+        // data.append('password', password)
+        // data.append('avatar', avatar)
 
 
+
+        // setLoaderSpinning(true)
+        // postFormData('/signup', data).then(x => {
+        //     setLoaderSpinning(false)
+        //     navigate('/login')
+        // })
+
+        let data = {
+            username,
+            password,
+            avatar
+        }
 
         setLoaderSpinning(true)
-        postFormData('/signup', data).then(x => {
+        postJsonData('/signup', data).then(x => {
             setLoaderSpinning(false)
             navigate('/login')
         })
+
 
     }
 
@@ -52,10 +67,11 @@ export default function () {
                 <TextField id="standard-basic" label="Password" type={'Password'} variant="standard" value={password} onChange={e => setPassword(e.target.value)} />
                 <br />
                 <br />
-                <TextField type={'file'} id="user-avatar" label="Avatar" variant="standard" />
+                <FileUpload onUploaded={setAvatar} />
+                {/* <TextField type={'file'} id="user-avatar" label="Avatar" variant="standard" /> */}
                 <br />
                 <br />
-                <Button variant="contained" onClick={signup}>Login</Button>
+                <Button variant="contained" onClick={signup}>Signup</Button>
             </div>
         </div>
     )

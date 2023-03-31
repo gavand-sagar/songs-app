@@ -1,0 +1,7 @@
+.file-image-container{
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    height: 100px;
+    width: 100px;
+}

@@ -1,22 +1,37 @@
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import { Skeleton } from '@mui/material'
-import React, { useState } from 'react'
+import './FileUpload.css'
+import React, { useEffect, useState } from 'react'
 import { baseURL } from '../../../data/constants';
 import { postFormData } from '../../utils/ApiUtitilities';
-export default function FileUpload({ onUploaded }) {
+const defaultValues = {
+  formFieldName: 'myFile',
+  uploadUrlPath: '/app-image-upload'
+}
+export default function FileUpload({ onUploaded, formFieldName, uploadUrlPath }) {
   const [uploading, setUploading] = useState();
+  const [style, setStyle] = useState({
+  })
   const [fileName, setFileName] = useState('')
   function upload() {
     const avatar = document.getElementById('app-file-upload').files[0]
     uploadFile(avatar)
   }
 
+  useEffect(() => {
+    if (fileName) {
+      setStyle({
+        'background': `url(${baseURL}/image/${fileName})`,       
+      })
+    }
+  }, [fileName])
+
   function uploadFile(avatar) {
     let data = new FormData();
-    data.append('myFile', avatar)
+    data.append(formFieldName ?? defaultValues.formFieldName, avatar)
 
     setUploading(true)
-    postFormData('/app-image-upload', data).then(x => {
+    postFormData(uploadUrlPath ?? defaultValues.uploadUrlPath, data).then(x => {
       setFileName(x.filename)
       console.log(x)
       onUploaded && onUploaded(x.filename)
@@ -72,10 +87,14 @@ export default function FileUpload({ onUploaded }) {
       <input disabled={uploading} onChange={upload} style={{ 'display': 'none' }} id='app-file-upload' type={'file'}></input>
       <div>
         {
-          uploading || (!fileName) ? <Skeleton height={100} width={150} /> :
+          (!fileName && !uploading) ? <div>Drop Files !!!</div> :
             <>
-              {fileName && <img height={'100px'} width={'150px'} src={`${baseURL}/image/${fileName}`} />}
-            </>
+              {
+                uploading ? <div>Uploading ...</div> :
+                  <>
+                    {fileName && <div className='file-image-container' style={style} />}
+                  </>
+              }</>
         }
 
       </div>

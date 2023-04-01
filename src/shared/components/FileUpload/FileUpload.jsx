@@ -1,8 +1,6 @@
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
-import { Skeleton } from '@mui/material'
 import './FileUpload.css'
 import React, { useEffect, useState } from 'react'
-import { baseURL } from '../../../data/constants';
 import { postFormData } from '../../utils/ApiUtitilities';
 const defaultValues = {
   formFieldName: 'myFile',
@@ -21,7 +19,7 @@ export default function FileUpload({ onUploaded, formFieldName, uploadUrlPath })
   useEffect(() => {
     if (fileName) {
       setStyle({
-        'background': `url(${baseURL}/image/${fileName})`,       
+        'background': `url(${process.env.REACT_APP_BASE_URL}/image/${fileName})`,       
       })
     }
   }, [fileName])

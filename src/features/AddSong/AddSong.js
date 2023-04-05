@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
-import { postFormData } from '../../shared/utils/ApiUtitilities.js'
+import { postJsonData } from '../../shared/utils/ApiUtitilities.js'
 import Header from '../../shared/components/Header/Header.js'
 import { useLoader } from '../../shared/hooks/useLoader.js'
 import { useForm } from 'react-hook-form'
 import { Button, TextField } from '@mui/material'
 import { useSelector } from 'react-redux'
+import FileUpload from '../../shared/components/FileUpload/FileUpload.jsx'
 
 export default function AddSong() {
 
     const { username } = useSelector(state => state.user)
-
+    const [file, setFile] = useState('')
 
     const { handleSubmit, register, formState: { errors } } = useForm();
 
@@ -17,21 +18,10 @@ export default function AddSong() {
 
     function save(obj) {
 
-        const file = document.getElementById('song-image').files[0]
-        let data = new FormData();
-        for (const key in obj) {
-            if (key == 'songImage') {
-                data.append('songImage', file)
-            } else {
-                data.append(key, obj[key])
-            }
-        }
-
-
-        // console.log(data)
+        obj['songImage'] = file;
 
         setLoaderSpinning(true)
-        postFormData('/songs', data)
+        postJsonData('/songs', obj)
             .then(response => {
                 setLoaderSpinning(false)
 
@@ -46,7 +36,7 @@ export default function AddSong() {
 
             <form className='add-song-form' onSubmit={handleSubmit(save)}>
                 <div>
-                    <TextField variant='standard' type={'file'} id='song-image' label="Song Image" {...register('songImage')} placeholder='Song Image' />
+                    <FileUpload onUploaded={setFile} />
                 </div>
                 <div>
                     <TextField error={errors?.songName} helperText={errors?.songName?.message} label="Song Name" {...register('songName', { required: "Song is required" })} placeholder='Song Name' />
@@ -59,21 +49,6 @@ export default function AddSong() {
                 </div>
             </form>
 
-
-
-            {/* <form onSubmit={handleSubmit(save)}>
-                <div>
-                    <input {...register('songName', { required: "Song is required" })} placeholder='Song Name'></input>
-                    <span>{errors?.songName?.message}</span>
-                </div>
-                <div>
-                    <input type={'number'} {...register('rating', { required: 'rating is Required', min: { value: 0, message: 'Minumum value is 0' }, max: { value: 5, message: 'Maximun is 5' } })} placeholder='rating'></input>
-                    <span>{errors?.rating?.message}</span>
-                </div>
-                <div>
-                    <button type='submit' >Save Song</button>
-                </div>
-            </form> */}
         </div>
     )
 }

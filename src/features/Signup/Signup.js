@@ -22,21 +22,6 @@ export default function () {
 
     function signup() {
 
-        // const avatar = document.getElementById('user-avatar').files[0]
-
-        // let data = new FormData();
-        // data.append('username', username)
-        // data.append('password', password)
-        // data.append('avatar', avatar)
-
-
-
-        // setLoaderSpinning(true)
-        // postFormData('/signup', data).then(x => {
-        //     setLoaderSpinning(false)
-        //     navigate('/login')
-        // })
-
         let data = {
             username,
             password,
@@ -45,8 +30,11 @@ export default function () {
 
         setLoaderSpinning(true)
         postJsonData('/signup', data).then(x => {
+            if (x.message == "created") {
+                navigate('/login')
+            }
+            alert(x.message)
             setLoaderSpinning(false)
-            navigate('/login')
         })
 
 

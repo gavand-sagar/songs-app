@@ -31,14 +31,14 @@ export default function () {
         }).then(res => res.json())
             .then(response => {
                 setLoaderSpinning(false)
-                if (response == "Un Authorized") {
-                    localStorage.clear()
-                    alert("Un Authorized")
-                } else {
+                if (response.token) {
                     localStorage.setItem("username", username)
                     localStorage.setItem("token", response.token)
                     localStorage.setItem("avatar", response.avatar)
                     navigate('/song-list')
+                } else {
+                    localStorage.clear()
+                    alert("Un Authorized")
                 }
             })
 

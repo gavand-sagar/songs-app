@@ -27,6 +27,7 @@ export default function Header() {
                 <Link className='no-underline' to={'/song-list'}><Button className='no-underline' variant='contained'>List</Button></Link>&nbsp;&nbsp;&nbsp;&nbsp;
                 <Link className='no-underline' to={'/add-song'}><Button className='no-underline' variant='contained'>Add</Button></Link>&nbsp;&nbsp;&nbsp;&nbsp;
                 <Link className='no-underline' to={'/delete-song'}><Button className='no-underline' variant='contained'>Delete</Button></Link>&nbsp;&nbsp;&nbsp;&nbsp;
+                <Link className='no-underline' to={'/global-chat'}><Button className='no-underline' variant='contained'>Chat</Button></Link>&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 

@@ -1,0 +1,94 @@
+.chat-item{
+    display: flex;
+    justify-content: flex-start;
+    word-break: break-all;
+}
+
+.chat-item.self{
+    justify-content: flex-end;
+}
+
+.chat-item-content{
+    background: var(--chat-item-background);
+    min-height: 3rem;
+    margin: 10px;
+    box-shadow: 5px 5px 9px 1px #e0dddd;
+    border-radius: 5px;
+    max-width: 90%;
+    min-width: 200px;
+
+    padding: 10px;
+}
+
+.typing{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.typing>.circle{
+    display: inline-block;
+    height: 5px;
+    width: 5px;
+    margin: 2px;
+    border-radius: 50%;
+    background-color: purple;
+
+}
+
+.circle.c1{
+    animation: infinite linear 0.5s blink1;
+}
+
+.circle.c2{
+    animation: infinite linear 0.5s blink2;
+}
+.circle.c3{
+    animation: infinite linear 0.5s blink3;
+}
+
+.chat-time-container{
+    font-size: 0.6rem;
+}
+.chat-author-container{
+    font-size: 0.7rem;
+}
+
+@keyframes blink1 {
+    0%{
+        background-color: purple;
+    }
+    50%{
+        background-color: transparent;
+    }
+    75%{
+        background-color: transparent;
+    }
+    
+}
+
+@keyframes blink2 {
+    0%{
+        background-color: transparent;
+    }
+    50%{
+        background-color: purple;
+    }
+    75%{
+        background-color: transparent;
+    }
+    
+}
+
+@keyframes blink3 {
+    0%{
+        background-color: transparent;
+    }
+    50%{
+        background-color: transparent;
+    }
+    75%{
+        background-color: purple;
+    }
+    
+}

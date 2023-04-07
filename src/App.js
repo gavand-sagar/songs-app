@@ -9,6 +9,7 @@ import Loader from './shared/components/Loader/Loader.js';
 import { useState } from 'react';
 import { GlobalData } from './data/GlobalData.js';
 import Signup from './features/Signup/Signup';
+import GlobalChat from './features/GlobalChat/GlobalChat';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path='/song-list' element={<SongsList />}></Route>
           <Route path='/add-song' element={<AddSong />}></Route>
           <Route path='/delete-song' element={<DeleteSong />}></Route>
+          <Route path='/global-chat' element={<GlobalChat />}></Route>
           <Route path='/' element={<Navigate to={'/login'} />} ></Route>
           <Route path='*' element={<h1>Page not found</h1>}></Route>
         </Routes>

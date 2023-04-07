@@ -5,6 +5,9 @@
     --base-popup-background: linear-gradient(to top left, rgb(204, 197, 197), white);
     --base-spacing: 20px;
 }
+*{
+    box-sizing: border-box;
+}
 
 .header-username {
     font-size: 30px;

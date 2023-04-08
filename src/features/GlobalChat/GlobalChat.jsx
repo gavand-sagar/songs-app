@@ -6,19 +6,25 @@ import Header from '../../shared/components/Header/Header'
 import ChatItem from './ChatItem/ChatItem'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { addMessage, getAllChats, postChatMessage } from '../../data/messageSlice'
+import { addMessage, getAllChats, postChatMessage, postImTyping, removeMessage } from '../../data/messageSlice'
+import { typingRefreshTime } from '../../data/constants'
 
 export default function GlobalChat() {
-    const { handleSubmit, register, formState: { errors } } = useForm();
+    const { handleSubmit, register, formState: { errors },reset } = useForm();
     const messages = useSelector(store => store.messages.messages)
     const username = localStorage.getItem('username')
     const dispatch = useDispatch();
     function save(obj) {
         let mesageObj = {
             content: obj.message,
-            tempMessageId: uuid()
+            tempMessageId: uuid(),
+            time: new Date(),
+            status: 'sending',
+            author: username
         }
+        dispatch(addMessage(mesageObj))
         dispatch(postChatMessage(mesageObj))
+        reset()
     }
 
     const wssRef = useRef(null)
@@ -28,7 +34,13 @@ export default function GlobalChat() {
             wssRef.current = new WebSocket(process.env.REACT_APP_WS_URL);
             wssRef.current.onmessage = (webSocketMessage) => {
                 const messageBody = JSON.parse(webSocketMessage.data);
+                console.log(messageBody)
                 dispatch(addMessage(messageBody))
+                if (messageBody?.typing) {
+                    setTimeout(() => {
+                        dispatch(removeMessage(messageBody))
+                    }, 3000)
+                }
             };
         }
 
@@ -43,6 +55,23 @@ export default function GlobalChat() {
         document.getElementById('scroll-chat').scrollTop = topPos;
     }, [messages])
 
+    const isTypingRef = useRef(null)
+
+    function texBoxChanged(e) {
+        if (isTypingRef.current == null) {
+            const typingObj = {
+                author: username,
+                typing: true,
+                tempMessageId: uuid()
+            }
+            dispatch(postImTyping(typingObj))
+            isTypingRef.current = setTimeout(() => {
+                clearTimeout(isTypingRef.current)
+                isTypingRef.current = null
+            }, typingRefreshTime)
+        }
+    }
+
     return (
         <>
             <Header />
@@ -50,13 +79,13 @@ export default function GlobalChat() {
                 <div id='scroll-chat' className='chat-body'>
                     {
                         messages.map(x =>
-                            <ChatItem time={x.time} key={x._id} content={x.content} self={username == x.author} author={x.author} />
+                            <ChatItem status={x.status} time={x.time} key={x._id} typing={x.typing} content={x.content} self={username == x.author} author={x.author} />
                         )
                     }
                     <div id='scroll-guide'></div>
                 </div>
                 <form onSubmit={handleSubmit(save)} className='chat-footer'>
-                    <TextField {...register('message')} className="chat-input" />
+                    <TextField {...register('message', { onChange: texBoxChanged })} className="chat-input" />
                     <Button type='submit' className="chat-send" variant='contained'>Send</Button>
                 </form>
             </div>

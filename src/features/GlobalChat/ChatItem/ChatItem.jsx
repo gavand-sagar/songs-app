@@ -2,13 +2,16 @@ import TimeTransform from '../TimeTransform/TimeTransform'
 import './ChatItem.css'
 import React from 'react'
 
-export default function ChatItem({ self, typing, content, author,time }) {
+export default function ChatItem({ self, typing, content, author, time,status }) {
   if (typing) {
+    if (self) {
+      return <></>
+    }
     return (
       <div className={self ? 'typing-chat-item chat-item self' : 'typing-chat-item chat-item'}>
         <div className='chat-item-content'>
           <div className='chat-author-container'>{self ? 'You' : author}</div>
-          
+
           <span className='typing'>
             {/* <span>Typing</span> */}
             <span className='circle c1'></span>
@@ -26,7 +29,11 @@ export default function ChatItem({ self, typing, content, author,time }) {
           <p>
             {content}
           </p>
-          <div className='chat-time-container'>{<TimeTransform value={time} />}</div>
+          <div className='chat-time-container'>
+            {
+              status == 'sending' ? <>Sending</> : <TimeTransform value={time} />
+            }
+            </div>
         </div>
       </div>
     )

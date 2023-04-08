@@ -10,6 +10,16 @@ export function postJsonData(url, obj) {
     }).then(res => res.json())
 }
 
+export function putJsonData(url, obj) {
+    return fetch(baseURL + url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            token: localStorage.getItem('token')
+        },
+        body: JSON.stringify(obj)
+    }).then(res => res.json())
+}
 
 export function postFormData(url, obj) {    
     return fetch(baseURL + url, {

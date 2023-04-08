@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getJsonData, postJsonData } from "../shared/utils/ApiUtitilities.js";
+import { getJsonData, postJsonData, putJsonData } from "../shared/utils/ApiUtitilities.js";
 
 export const getAllChats = createAsyncThunk('getAllChats', () => {
     return getJsonData('/messages')
@@ -7,6 +7,10 @@ export const getAllChats = createAsyncThunk('getAllChats', () => {
 
 export const postChatMessage = createAsyncThunk('postMessage', (message) => {
     return postJsonData('/messages', message)
+})
+
+export const postImTyping = createAsyncThunk('postImTyping', (data) => {
+    return putJsonData('/messages/typing', data)
 })
 
 
@@ -18,7 +22,7 @@ const messagesSlice = createSlice({
     },
     extraReducers: (builder) => {
 
-        builder.addCase(getAllChats.fulfilled, (state, action) => {           
+        builder.addCase(getAllChats.fulfilled, (state, action) => {
             state.messages = action.payload
         })
 
@@ -34,10 +38,14 @@ const messagesSlice = createSlice({
     reducers: {
         addMessage: (state, action) => {
             state.messages.push(action.payload)
+
+        },
+        removeMessage: (state, action) => {
+            state.messages = state.messages.filter(x => x.tempMessageId != action.payload.tempMessageId)
         }
     }
 })
 
-export const { addMessage } = messagesSlice.actions;
+export const { addMessage, removeMessage } = messagesSlice.actions;
 
 export default messagesSlice;

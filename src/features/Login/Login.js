@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { baseURL } from '../../data/constants.js'
 import { useLoader } from '../../shared/hooks/useLoader'
+import jwt_decode from "jwt-decode";
 
 export default function () {
     const [username, setUsername] = useState('')
@@ -13,10 +14,20 @@ export default function () {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (localStorage.getItem('token')) {
-            navigate('/song-list')
+        let token = localStorage.getItem('token')
+        if (token) {
+            try {
+                var decoded = jwt_decode(token);
+                if (decoded && (decoded.exp * 1000) > new Date().getTime()) {
+                    navigate('/song-list')
+                } else {
+                    localStorage.clear()
+                }
+            } catch {
+                localStorage.clear()
+            }
         }
-    })
+    }, [])
 
     function login() {
 

@@ -18,7 +18,7 @@ const messagesSlice = createSlice({
     },
     extraReducers: (builder) => {
 
-        builder.addCase(getAllChats.fulfilled, (state, action) => {
+        builder.addCase(getAllChats.fulfilled, (state, action) => {           
             state.messages = action.payload
         })
 

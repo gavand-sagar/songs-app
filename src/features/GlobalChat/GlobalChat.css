@@ -1,5 +1,5 @@
 :root{
-    --chat-footer-height:2rem;
+    --chat-footer-height:1.5rem;
     --chat-background:linear-gradient(to right,rgb(186, 209, 229),aliceblue,rgb(186, 209, 229));
     --chat-item-background:linear-gradient(to right,#65c1d0,#8aefff);
 }
@@ -30,6 +30,6 @@
 }
 
 .chat-container{
-    height: 100vh;
+    height: calc(100vh - var(--app-header-height) -  var(--chat-footer-height));
     width: 100vw;
 }

@@ -4,6 +4,7 @@
     --base-color-2: #1762ad;
     --base-popup-background: linear-gradient(to top left, rgb(204, 197, 197), white);
     --base-spacing: 20px;
+    --app-header-height:100px
 }
 
 html {
@@ -105,7 +106,7 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100px;
+    height: var(--app-header-height);
     position: sticky;
     top: 0;
     background: linear-gradient(to bottom right, var(--base-color-1), var(--base-color), var(--base-color-2));

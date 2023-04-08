@@ -20,20 +20,24 @@
     padding: 10px;
 }
 
+.typing-chat-item .chat-item-content{
+    min-width: 100px;
+}
+
 .typing{
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 0.9em;
 }
 
 .typing>.circle{
     display: inline-block;
-    height: 5px;
-    width: 5px;
-    margin: 2px;
+    height: 0.8em;
+    width: 0.8em;
+    margin: 5px;
     border-radius: 50%;
     background-color: purple;
-
 }
 
 .circle.c1{

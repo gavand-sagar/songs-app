@@ -18,8 +18,6 @@ export default function GlobalChat() {
             content: obj.message,
             tempMessageId: uuid()
         }
-
-        // dispatch(addMessage(messageBody))
         dispatch(postChatMessage(mesageObj))
     }
 
@@ -46,20 +44,23 @@ export default function GlobalChat() {
     }, [messages])
 
     return (
-        <div className='chat-container'>
-            <div id='scroll-chat' className='chat-body'>
-                {
-                    messages.map(x =>
-                        <ChatItem time={x.time} key={x._id} content={x.content} self={username == x.author} author={x.author} />
-                    )
-                }
-                <div id='scroll-guide'></div>
+        <>
+            <Header />
+            <div className='chat-container'>
+                <div id='scroll-chat' className='chat-body'>
+                    {
+                        messages.map(x =>
+                            <ChatItem time={x.time} key={x._id} content={x.content} self={username == x.author} author={x.author} />
+                        )
+                    }
+                    <div id='scroll-guide'></div>
+                </div>
+                <form onSubmit={handleSubmit(save)} className='chat-footer'>
+                    <TextField {...register('message')} className="chat-input" />
+                    <Button type='submit' className="chat-send" variant='contained'>Send</Button>
+                </form>
             </div>
-            <form onSubmit={handleSubmit(save)} className='chat-footer'>
-                <TextField {...register('message')} className="chat-input" />
-                <Button type='submit' className="chat-send" variant='contained'>Send</Button>
-            </form>
-        </div>
+        </>
     )
 }
 

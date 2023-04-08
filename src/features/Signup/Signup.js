@@ -68,7 +68,9 @@ export default function () {
         )
     } else {
         return (
-            <div className='login-page'></div>
+            <div className='login-page'>
+                <h1>Account creation is disabled at this moment</h1>
+            </div>
         )
     }
 

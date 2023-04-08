@@ -38,8 +38,15 @@ export default function GlobalChat() {
 
     }, [])
 
+    useEffect(() => {
+        console.log('meseage added')
+        var myElement = document.getElementById('scroll-guide');
+        var topPos = myElement.offsetTop;
+        document.getElementById('scroll-chat').scrollTop = topPos;
+    }, [messages])
+
     return (
-        <>
+        <div className='chat-container'>
             <div id='scroll-chat' className='chat-body'>
                 {
                     messages.map(x =>
@@ -52,7 +59,7 @@ export default function GlobalChat() {
                 <TextField {...register('message')} className="chat-input" />
                 <Button type='submit' className="chat-send" variant='contained'>Send</Button>
             </form>
-        </>
+        </div>
     )
 }
 

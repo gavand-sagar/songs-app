@@ -5,7 +5,12 @@
     --base-popup-background: linear-gradient(to top left, rgb(204, 197, 197), white);
     --base-spacing: 20px;
 }
-*{
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
     box-sizing: border-box;
 }
 
@@ -80,7 +85,7 @@
 
 .song-item {
     margin: var(--base-spacing);
-    border: 2px solid  var(--base-color);
+    border: 2px solid var(--base-color);
     border-radius: 5px;
     padding: var(--base-spacing);
     display: flex;
@@ -112,7 +117,7 @@
     color: white;
 }
 
-.add-song-form{
+.add-song-form {
     padding: 20px;
     display: flex;
     flex-direction: column;
